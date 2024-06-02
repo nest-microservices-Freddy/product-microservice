@@ -20,12 +20,14 @@ const { error, value } = envsSchema.validate({
   NATS_SERVERS: process.env.NATS_SERVERS?.split(','),
 });
 
-if (error) throw new Error(`Config validation error ${error.message}`);
+if (error) {
+  throw new Error(`Config validation error: ${error.message}`);
+}
 
-const envsVars: EnvVars = value;
+const envVars: EnvVars = value;
 
 export const envs = {
-  port: envsVars.PORT,
-  databaseUrl: envsVars.DATABASE_URL,
-  natsServers: envsVars.NATS_SERVERS,
+  port: envVars.PORT,
+  databaseUrl: envVars.DATABASE_URL,
+  natsServers: envVars.NATS_SERVERS,
 };
